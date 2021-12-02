@@ -21,10 +21,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
-//DBからJPQL(SQL)でデータを取得するクラス
-//constantsパッケージにてJPQLを定数に書き換えている
-
 /**
  * 日報データのDTOモデル
  *
@@ -32,16 +28,16 @@ import lombok.Setter;
 @Table(name = JpaConst.TABLE_REP)
 @NamedQueries({
     @NamedQuery(
-            name = JpaConst.Q_REP_GET_ALL,//全ての日報をidの降順に取得する
+            name = JpaConst.Q_REP_GET_ALL,
             query = JpaConst.Q_REP_GET_ALL_DEF),
     @NamedQuery(
-            name = JpaConst.Q_REP_COUNT,//全ての日報の件数を取得する
+            name = JpaConst.Q_REP_COUNT,
             query = JpaConst.Q_REP_COUNT_DEF),
     @NamedQuery(
-            name = JpaConst.Q_REP_GET_ALL_MINE,//指定した従業員が作成した日報を全件idの降順で取得する
+            name = JpaConst.Q_REP_GET_ALL_MINE,
             query = JpaConst.Q_REP_GET_ALL_MINE_DEF),
     @NamedQuery(
-            name = JpaConst.Q_REP_COUNT_ALL_MINE,//指定した従業員が作成した日報の件数を取得する
+            name = JpaConst.Q_REP_COUNT_ALL_MINE,
             query = JpaConst.Q_REP_COUNT_ALL_MINE_DEF)
 })
 
@@ -82,7 +78,7 @@ public class Report {
     /**
      * 日報の内容
      */
-    @Lob //入力した文章の改行も保存する為の記述
+    @Lob
     @Column(name = JpaConst.REP_COL_CONTENT, nullable = false)
     private String content;
 

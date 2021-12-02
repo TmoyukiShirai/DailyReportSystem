@@ -24,16 +24,16 @@ import lombok.Setter;
 @Table(name = JpaConst.TABLE_EMP)
 @NamedQueries({
     @NamedQuery(
-            name = JpaConst.Q_EMP_GET_ALL,//全従業員情報を取得
+            name = JpaConst.Q_EMP_GET_ALL,
             query = JpaConst.Q_EMP_GET_ALL_DEF),
     @NamedQuery(
-            name = JpaConst.Q_EMP_COUNT,//全従業員情報の件数を取得
+            name = JpaConst.Q_EMP_COUNT,
             query = JpaConst.Q_EMP_COUNT_DEF),
     @NamedQuery(
-            name = JpaConst.Q_EMP_COUNT_RESISTERED_BY_CODE,//社員番号がすでにDBに登録されているかチェック
+            name = JpaConst.Q_EMP_COUNT_RESISTERED_BY_CODE,
             query = JpaConst.Q_EMP_COUNT_RESISTERED_BY_CODE_DEF),
     @NamedQuery(
-            name = JpaConst.Q_EMP_GET_BY_CODE_AND_PASS,//ログイン時、社員番号とパスワードが正しいかチェック
+            name = JpaConst.Q_EMP_GET_BY_CODE_AND_PASS,
             query = JpaConst.Q_EMP_GET_BY_CODE_AND_PASS_DEF)
 })
 
@@ -57,7 +57,6 @@ public class Employee {
      */
     @Column(name = JpaConst.EMP_COL_CODE, nullable = false, unique = true)
     private String code;
-    //unique=true は一意制約（すでに登録されている番号は登録できない旨をDBに指定する為の指定
 
     /**
      * 氏名
