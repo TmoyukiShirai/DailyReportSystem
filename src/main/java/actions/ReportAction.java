@@ -155,7 +155,13 @@ public class ReportAction extends ActionBase {
             //該当の日報データが存在しない場合はエラー画面を表示
             forward(ForwardConst.FW_ERR_UNKNOWN);
 
-        } else {
+        } else if(checkAdmin()) {//管理者の場合、admin.judge.jspに遷移
+            putRequestScope(AttributeConst.REPORT, rv); //取得した日報データ
+
+            //詳細画面を表示
+            forward(ForwardConst.FW_REP_ADMIN);
+
+        }else {
 
             putRequestScope(AttributeConst.REPORT, rv); //取得した日報データ
 
@@ -163,6 +169,21 @@ public class ReportAction extends ActionBase {
             forward(ForwardConst.FW_REP_SHOW);
         }
     }
+
+        private boolean checkAdmin() throws ServletException, IOException {
+            //セッションからログイン中の従業員情報を取得
+            EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
+            if (ev.getAdminFlag() != AttributeConst.ROLE_ADMIN.getIntegerValue()) {
+
+                return false; //管理者でなければfalseを返す
+
+            } else {
+
+                return true;
+            }
+
+    }
+
 
     /**
      * 編集画面を表示する
