@@ -56,12 +56,17 @@
                     <th>所属長承認</th>
                     <td><pre>
                             <c:out value="${report.approval}" />
-                        </pre></td>
-                    <td><select id="approval" name="approval" class="form-control">
+                        </pre>
+                    <select id="approval" name="approval" class="form-control">
                             <option value="OK">OK</option>
                             <option value="再提出">再提出</option>
                     </select></td>
+
                 </tr>
+                <tr>
+                <th>所属長コメント</th>
+                <td><textarea></textarea></td>
+
             </tbody>
         </table>
 
@@ -71,7 +76,7 @@
                     href="<c:url value='?action=${actRep}&command=${commEdt}&id=${report.id}' />">この日報を編集する</a>
             </p>
         </c:if>
-
+<button type="submit">承認</button>
         <p>
             <a href="<c:url value='?action=${actRep}&command=${commIdx}' />">一覧に戻る</a>
         </p>

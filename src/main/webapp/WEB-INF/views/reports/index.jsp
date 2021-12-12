@@ -2,10 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="constants.ForwardConst" %>
+<%@ page import="constants.AttributeConst" %>
 
 <c:set var="actRep" value="${ForwardConst.ACT_REP.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var="commShow" value="${ForwardConst.CMD_SHOW.getValue()}" />
+<c:set var="commAdminJ" value="${ForwardConst.CMD_ADMINJ.getValue()}" />
 <c:set var="commNew" value="${ForwardConst.CMD_NEW.getValue()}" />
 
 <c:import url="/WEB-INF/views/layout/app.jsp">
@@ -32,8 +34,15 @@
                         <td class="report_name"><c:out value="${report.employee.name}" /></td>
                         <td class="report_date"><fmt:formatDate value='${reportDay}' pattern='yyyy-MM-dd' /></td>
                         <td class="report_title">${report.title}</td>
-                        <td class="report_action"><a href="<c:url value='?action=${actRep}&command=${commShow}&id=${report.id}' />">詳細を見る</a></td>
-                        <%--<td class="report_approval">${report.approval}</td>  --%>
+                        <td class="report_action">
+                        ${sessionScope.login_employee.adminFlag}
+
+                        <c:if test="${sessionScope.login_employee != null}">
+                    <c:if test="${sessionScope.login_employee.adminFlag == AttributeConst.ROLE_ADMIN.getIntegerValue()}">
+                    <a href="<c:url value='?action=${actRep}&command=${commAdminJ}&id=${report.id}' />">詳細を見る</a></c:if>
+                    <a href="<c:url value='?action=${actRep}&command=${commShow}&id=${report.id}' />">詳細を見る</a></c:if>
+                    </td>
+
                     </tr>
                 </c:forEach>
             </tbody>
@@ -56,3 +65,4 @@
 
     </c:param>
 </c:import>
+

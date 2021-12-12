@@ -13,11 +13,12 @@ public enum ForwardConst {
     ACT_REP("Report"),
     ACT_AUTH("Auth"),
 
-    //command
+    //command　←urlの末尾の文字http://localhost:8080/daily_report_system/?action=Auth&command=showLogin
     CMD("command"),
     CMD_NONE(""),
     CMD_INDEX("index"),
     CMD_SHOW("show"),
+    CMD_ADMINJ("adminJudge"),
     CMD_SHOW_LOGIN("showLogin"),
     CMD_LOGIN("login"),
     CMD_LOGOUT("logout"),
