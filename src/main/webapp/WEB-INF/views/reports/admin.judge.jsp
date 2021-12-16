@@ -3,11 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="constants.ForwardConst"%>
+<%@ page import="constants.AttributeConst" %>
 
 
 <c:set var="actRep" value="${ForwardConst.ACT_REP.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var="commEdt" value="${ForwardConst.CMD_EDIT.getValue()}" />
+<c:set var="commAdminJ" value="${ForwardConst.CMD_ADMINJ.getValue()}" />
 
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
@@ -52,20 +54,38 @@
                     <td><fmt:formatDate value="${updateDay}"
                             pattern="yyyy-MM-dd HH:mm:ss" /></td>
                 </tr>
-                <tr>
+               <!--  <tr>
                     <th>所属長承認</th>
-                    <td><pre>
-                            <c:out value="${report.approval}" />
-                        </pre>
+                    <td>
                     <select id="approval" name="approval" class="form-control">
                             <option value="OK">OK</option>
                             <option value="再提出">再提出</option>
                     </select></td>
 
+                </tr> -->
+
+                <form id="approval" id="comment" method="POST" action="?action=Report&command=adminJudge">
+                 <tr>
+                    <th>所属長承認</th>
+                    <td>
+                    <select id="approval" name="${AttributeConst.REP_APPROVAL.getValue()}" class="form-control">
+                            <option value="OK">OK</option>
+                            <option value="再提出">再提出</option>
+                    </select>
+                    </td>
                 </tr>
+
                 <tr>
-                <th>所属長コメント</th>
-                <td><textarea></textarea></td>
+                <th>
+                 <label for="${AttributeConst.REP_COMMENT.getValue()}">所属長コメント</label></th>
+                 <td>
+                <textarea id="comment" name="${AttributeConst.REP_COMMENT.getValue()}" rows="5" cols="25">${report.comment}</textarea>
+                <input type="hidden" name="${AttributeConst.REP_ID.getValue()}" value="${report.id}" />　<!-- リクエストとしてメソッドに送る -->
+　　　　　　　　　　<input type="hidden" name="${AttributeConst.TOKEN.getValue()}" value="${_token}" />　<!-- リクエストとしてメソッドに送る -->
+                <button type="submit">承認</button>
+                </td>
+                </tr>
+                </form>
 
             </tbody>
         </table>
@@ -76,7 +96,6 @@
                     href="<c:url value='?action=${actRep}&command=${commEdt}&id=${report.id}' />">この日報を編集する</a>
             </p>
         </c:if>
-<button type="submit">承認</button>
         <p>
             <a href="<c:url value='?action=${actRep}&command=${commIdx}' />">一覧に戻る</a>
         </p>

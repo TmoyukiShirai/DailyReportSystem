@@ -7,7 +7,7 @@
 <c:set var="actRep" value="${ForwardConst.ACT_REP.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var="commShow" value="${ForwardConst.CMD_SHOW.getValue()}" />
-<c:set var="commAdminJ" value="${ForwardConst.CMD_ADMINJ.getValue()}" />
+<c:set var="commShowAdmin" value="${ForwardConst.CMD_SHOW_ADMIN.getValue()}" />
 <c:set var="commNew" value="${ForwardConst.CMD_NEW.getValue()}" />
 
 <c:import url="/WEB-INF/views/layout/app.jsp">
@@ -24,8 +24,9 @@
                     <th class="report_name">氏名</th>
                     <th class="report_date">日付</th>
                     <th class="report_title">タイトル</th>
-                    <th class="report_action">操作</th>
                    <th class="report_approval">承認</th>
+                   <th class="report_comment">コメント</th>
+                   <th class="report_action">操作</th>
                 </tr>
                 <c:forEach var="report" items="${reports}" varStatus="status">
                     <fmt:parseDate value="${report.reportDate}" pattern="yyyy-MM-dd" var="reportDay" type="date" />
@@ -34,15 +35,15 @@
                         <td class="report_name"><c:out value="${report.employee.name}" /></td>
                         <td class="report_date"><fmt:formatDate value='${reportDay}' pattern='yyyy-MM-dd' /></td>
                         <td class="report_title">${report.title}</td>
-                        <td class="report_action">
-                        ${sessionScope.login_employee.adminFlag}
-
-                        <c:if test="${sessionScope.login_employee != null}">
+                        <td class="report_approval">${report.approval}</td>
+                        <td class="report_comment"><c:out value="${report.comment}" /></td>
+                        <td class="report_action"> ${sessionScope.login_employee.adminFlag}
+                        <c:if test="${sessionScope.login_employee != null}"></c:if>
                     <c:if test="${sessionScope.login_employee.adminFlag == AttributeConst.ROLE_ADMIN.getIntegerValue()}">
-                    <a href="<c:url value='?action=${actRep}&command=${commAdminJ}&id=${report.id}' />">詳細を見る</a></c:if>
+                    <a href="<c:url value='?action=${actRep}&command=${commShowAdmin}&id=${report.id}' />">詳細を見る</a></c:if>
+                    <c:if test="${sessionScope.login_employee.adminFlag != AttributeConst.ROLE_ADMIN.getIntegerValue()}">
                     <a href="<c:url value='?action=${actRep}&command=${commShow}&id=${report.id}' />">詳細を見る</a></c:if>
                     </td>
-
                     </tr>
                 </c:forEach>
             </tbody>

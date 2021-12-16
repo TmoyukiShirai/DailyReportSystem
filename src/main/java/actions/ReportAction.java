@@ -14,7 +14,6 @@ import constants.JpaConst;
 import constants.MessageConst;
 import services.ReportService;
 
-
 /**
  * 日報に関する処理を行うActionクラス
  *
@@ -65,6 +64,7 @@ public class ReportAction extends ActionBase {
         //一覧画面を表示
         forward(ForwardConst.FW_REP_INDEX);
     }
+
     /**
      * 新規登録画面を表示する
      * @throws ServletException
@@ -115,6 +115,7 @@ public class ReportAction extends ActionBase {
                     getRequestParam(AttributeConst.REP_CONTENT),
                     null,
                     null,
+                    null,
                     null);
 
             //日報情報登録
@@ -156,7 +157,7 @@ public class ReportAction extends ActionBase {
             //該当の日報データが存在しない場合はエラー画面を表示
             forward(ForwardConst.FW_ERR_UNKNOWN);
 
-        }else {
+        } else {
 
             putRequestScope(AttributeConst.REPORT, rv); //取得した日報データ
 
@@ -166,20 +167,75 @@ public class ReportAction extends ActionBase {
     }
 
 
-    public void adminJudge() throws ServletException, IOException {
-
+    /**
+     * 承認画面を表示する
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void showAdmin() throws ServletException, IOException {
+        //System.out.println("admin1");
         //idを条件に日報データを取得する
         ReportView rv = service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
 
+        //セッションからログイン中の従業員情報を取得
+        EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
+
         if (rv == null) {
-            //該当の日報データが存在しない場合はエラー画面を表示
+            //該当の日報データが存在しない、または
+           // System.out.println("admin2");
             forward(ForwardConst.FW_ERR_UNKNOWN);
 
         } else {
+
+            putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
             putRequestScope(AttributeConst.REPORT, rv); //取得した日報データ
 
-            //詳細画面を表示
+            //承認画面を表示
+           // System.out.println("admin3");
             forward(ForwardConst.FW_REP_ADMIN);
+        }
+
+    }
+
+
+
+    public void adminJudge() throws ServletException, IOException {
+
+        System.out.println("admin1 | " + getRequestParam(AttributeConst.TOKEN) + " / " + getTokenId());
+        //CSRF対策 tokenのチェック
+        if (checkToken()) {
+
+            //idを条件に日報データを取得する
+            ReportView rv = service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
+
+            //入力された日報内容を設定する
+            rv.setApproval(getRequestParam(AttributeConst.REP_APPROVAL));
+            rv.setComment(getRequestParam(AttributeConst.REP_COMMENT));
+
+            //日報データを更新する
+            List<String> errors = service.update(rv);
+
+            if (errors.size() > 0) {
+                //更新中にエラーが発生した場合
+
+                putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
+                putRequestScope(AttributeConst.REPORT, rv); //入力された日報情報
+                putRequestScope(AttributeConst.ERR, errors); //エラーのリスト
+
+                //承認画面を再表示
+                System.out.println("admin2");
+                forward(ForwardConst.FW_REP_ADMIN);
+            } else {
+                //更新中にエラーがなかった場合
+
+                //セッションに更新完了のフラッシュメッセージを設定
+                putSessionScope(AttributeConst.FLUSH, MessageConst.I_UPDATED.getMessage());
+
+                //一覧画面にリダイレクト
+                System.out.println("admin3");
+                redirect(ForwardConst.ACT_REP, ForwardConst.CMD_INDEX);
+
+            }
         }
     }
 
@@ -255,6 +311,5 @@ public class ReportAction extends ActionBase {
             }
         }
     }
-
 
 }

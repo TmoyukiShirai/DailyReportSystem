@@ -98,5 +98,10 @@ public class Report {
      */
     @Column(name = JpaConst.REP_COL_APPROVAL, nullable = true)
     private String approval;
+    /**
+     * 所属長承認
+     */
+    @Column(name = JpaConst.REP_COL_COMMENT, nullable = true)
+    private String comment;
 
 }
