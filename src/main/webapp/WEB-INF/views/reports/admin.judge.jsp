@@ -82,7 +82,7 @@
                 <textarea id="comment" name="${AttributeConst.REP_COMMENT.getValue()}" rows="5" cols="25">${report.comment}</textarea>
                 <input type="hidden" name="${AttributeConst.REP_ID.getValue()}" value="${report.id}" />　<!-- リクエストとしてメソッドに送る -->
 　　　　　　　　　　<input type="hidden" name="${AttributeConst.TOKEN.getValue()}" value="${_token}" />　<!-- リクエストとしてメソッドに送る -->
-                <button type="submit">承認</button>
+                <div><button type="submit">承認</button></div>
                 </td>
                 </tr>
                 </form>

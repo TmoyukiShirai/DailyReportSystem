@@ -229,7 +229,7 @@ public class ReportAction extends ActionBase {
                 //更新中にエラーがなかった場合
 
                 //セッションに更新完了のフラッシュメッセージを設定
-                putSessionScope(AttributeConst.FLUSH, MessageConst.I_UPDATED.getMessage());
+                putSessionScope(AttributeConst.FLUSH, MessageConst.I_APPROVED.getMessage());
 
                 //一覧画面にリダイレクト
                 System.out.println("admin3");
