@@ -38,7 +38,25 @@ import lombok.Setter;
             query = JpaConst.Q_REP_GET_ALL_MINE_DEF),
     @NamedQuery(
             name = JpaConst.Q_REP_COUNT_ALL_MINE,
-            query = JpaConst.Q_REP_COUNT_ALL_MINE_DEF)
+            query = JpaConst.Q_REP_COUNT_ALL_MINE_DEF),
+    @NamedQuery(
+            name = JpaConst.Q_REP_GET_BY_SEARCH,
+            query = JpaConst.Q_REP_GET_BY_SEARCH_DEF),
+    @NamedQuery(
+            name = JpaConst.Q_REP_COUNT_BY_SEARCH,
+            query = JpaConst.Q_REP_COUNT_BY_SEARCH_DEF),
+
+
+//    @NamedQuery(
+//            name = JpaConst.Q_REP_GET_TITLE_BY_SEARCH,
+//            query = JpaConst.Q_REP_GET_TITLE_BY_SEARCH_DEF),
+//    @NamedQuery(
+//            name = JpaConst.Q_REP_COUNT_TITLE_BY_SEARCH,
+//            query = JpaConst.Q_REP_COUNT_TITLE_BY_SEARCH_DEF),
+//    @NamedQuery(
+//            name = JpaConst.Q_REP_GET_ALL_UNAPPROVED,
+//            query = JpaConst.Q_REP_GET_ALL_UNAPPROVED_DEF)
+
 })
 
 @Getter //全てのクラスフィールドについてgetterを自動生成する(Lombok)
@@ -49,7 +67,9 @@ import lombok.Setter;
 public class Report {
 
     /**
-     * id
+     * id,
+     *レポートのid,
+     *
      */
     @Id
     @Column(name = JpaConst.REP_COL_ID)
@@ -58,6 +78,7 @@ public class Report {
 
     /**
      * 日報を登録した従業員
+     * 従業員のid
      */
     @ManyToOne
     @JoinColumn(name = JpaConst.REP_COL_EMP, nullable = false)

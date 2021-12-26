@@ -101,4 +101,11 @@ public class EmployeeConverter {
 
     }
 
+
+    //検索のための追記
+    public static Object toModel(String employee) {
+        // TODO 自動生成されたメソッド・スタブ
+        return null;
+    }
+
 }

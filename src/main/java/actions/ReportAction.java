@@ -101,7 +101,7 @@ public class ReportAction extends ActionBase {
                 day = LocalDate.now();
             } else {
                 day = LocalDate.parse(getRequestParam(AttributeConst.REP_DATE));
-            }
+            }//parse()はString型からDate型へ変更するメソッド
 
             //セッションからログイン中の従業員情報を取得
             EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);

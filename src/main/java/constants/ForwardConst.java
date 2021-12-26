@@ -6,14 +6,15 @@ package constants;
  */
 public enum ForwardConst {
 
-    //action
+    //action　クラス名（〇〇Action)
     ACT("action"),
     ACT_TOP("Top"),
     ACT_EMP("Employee"),
     ACT_REP("Report"),
     ACT_AUTH("Auth"),
+    ACT_SEARCH("Search"),
 
-    //command　←urlの末尾の文字http://localhost:8080/daily_report_system/?action=Auth&command=showLogin
+    //command　←メソッド名、URLの末尾の文字になるhttp://localhost:8080/daily_report_system/?action=Auth&command=showLogin
     CMD("command"),
     CMD_NONE(""),
     CMD_INDEX("index"),
@@ -28,6 +29,7 @@ public enum ForwardConst {
     CMD_EDIT("edit"),
     CMD_UPDATE("update"),
     CMD_DESTROY("destroy"),
+    CMD_SEARCH("search"),
 
     //jsp
     FW_ERR_UNKNOWN("error/unknown"),

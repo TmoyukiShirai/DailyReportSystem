@@ -20,6 +20,7 @@
         </c:if>
         <h2>ログイン</h2>
         <form method="POST" action="<c:url value='/?action=${action}&command=${command}' />">
+        <%-- このURLのクラス(action)とメソッド(command)は上記<c:setで定義してある --%>
             <label for="${AttributeConst.EMP_CODE.getValue()}">社員番号</label><br />
             <input type="text" name="${AttributeConst.EMP_CODE.getValue()}" value="${code}" />
             <br /><br />

@@ -4,11 +4,16 @@
 <%@ page import="constants.ForwardConst" %>
 <%@ page import="constants.AttributeConst" %>
 
+<c:set var="action" value="${ForwardConst.ACT_AUTH.getValue()}" />
+<c:set var="command" value="${ForwardConst.CMD_LOGIN.getValue()}" />
+
 <c:set var="actRep" value="${ForwardConst.ACT_REP.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var="commShow" value="${ForwardConst.CMD_SHOW.getValue()}" />
 <c:set var="commShowAdmin" value="${ForwardConst.CMD_SHOW_ADMIN.getValue()}" />
 <c:set var="commNew" value="${ForwardConst.CMD_NEW.getValue()}" />
+<c:set var="commSearch" value="${ForwardConst.CMD_SEARCH.getValue()}" />
+<c:set var="actSearch" value="${ForwardConst.ACT_SEARCH.getValue()}" />
 
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
@@ -20,8 +25,8 @@
         <h2>
             <span class="allreports">日報　一覧</span>
             <span class="wrap">
-             　　<form action="" autocomplete="on">
-                <input id="search" name="search" type="text" placeholder="氏名、タイトルで検索"><input id="search-submit" value="Rechercher" type="submit">
+             　　<form method="POST" action="<c:url value='/?action=${actSearch}&command=${commSearch}' />" autocomplete="on">
+                <input id="search" name="${AttributeConst.EMPLOYEE.getValue()}" value="${id}" type="text" placeholder="氏名、タイトルで検索"><input id="search-submit" value="Rechercher" type="submit">
                 </form>
             </span>
         </h2>

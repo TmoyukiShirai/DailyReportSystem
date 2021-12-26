@@ -16,12 +16,47 @@ import models.validators.ReportValidator;
  */
 public class ReportService extends ServiceBase {
 
+
+    /**
+     * 検索に該当する従業員の日報データを、指定されたページ数の一覧画面に表示する分取得しReportViewのリストで返却する
+     * @param employee 従業員
+     * @param page ページ数
+     * @return 一覧画面に表示するデータのリスト
+     */
+
+    public List<ReportView> getReportBySearchPerPage(String employee, int page) {
+
+        List<Report> reports = em.createNamedQuery(JpaConst.Q_REP_GET_BY_SEARCH, Report.class)
+                .setParameter(JpaConst.JPQL_PARM_EMPLOYEE, employee)
+                //setParameter(〇〇, △△)　〇〇を△△に置き換える処理、
+                .setFirstResult(JpaConst.ROW_PER_PAGE * (page - 1))
+                .setMaxResults(JpaConst.ROW_PER_PAGE)
+                .getResultList();
+        return ReportConverter.toViewList(reports);
+    }
+
+    /**
+     * 検索に該当する従業員が作成した日報データの件数を取得し、返却する
+     * @param employee
+     * @return 日報データの件数
+     */
+    public long countAllBySearch(String employee) {
+
+        long count = (long) em.createNamedQuery(JpaConst.Q_REP_COUNT_BY_SEARCH, Long.class)
+                .setParameter(JpaConst.JPQL_PARM_EMPLOYEE, employee)
+                .getSingleResult();
+
+        return count;
+    }
+
+
     /**
      * 指定した従業員が作成した日報データを、指定されたページ数の一覧画面に表示する分取得しReportViewのリストで返却する
      * @param employee 従業員
      * @param page ページ数
      * @return 一覧画面に表示するデータのリスト
      */
+
     public List<ReportView> getMinePerPage(EmployeeView employee, int page) {
 
         List<Report> reports = em.createNamedQuery(JpaConst.Q_REP_GET_ALL_MINE, Report.class)
@@ -153,5 +188,41 @@ public class ReportService extends ServiceBase {
         em.getTransaction().commit();
 
     }
+
+
+
+    /**
+     * 検索したタイトルに該当する日報データを、指定されたページ数の一覧画面に表示する分取得しReportViewのリストで返却する
+     * @param title タイトル
+     * @param page ページ数
+     * @return 一覧画面に表示するデータのリスト
+     */
+
+    public List<ReportView> getTitlePerPage(ReportView title, int page) {
+
+        List<Report> reports = em.createNamedQuery(JpaConst.Q_REP_GET_TITLE_BY_SEARCH, Report.class)
+                .setParameter(JpaConst.JPQL_PARM_TITLE, ReportConverter.toModel(title))
+                .setFirstResult(JpaConst.ROW_PER_PAGE * (page - 1))
+                .setMaxResults(JpaConst.ROW_PER_PAGE)
+                .getResultList();
+        return ReportConverter.toViewList(reports);
+    }
+
+    /**
+     * 検索したタイトルに該当する日報データの件数を取得し、返却する
+     * @param title
+     * @return 日報データの件数
+     */
+    public long countTitle(ReportView title) {
+
+        long count = (long) em.createNamedQuery(JpaConst.Q_REP_COUNT_TITLE_BY_SEARCH, Long.class)
+                .setParameter(JpaConst.JPQL_PARM_TITLE, ReportConverter.toModel(title))
+                .getSingleResult();
+
+        return count;
+    }
+
+
+
 
 }
