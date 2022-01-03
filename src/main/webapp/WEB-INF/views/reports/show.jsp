@@ -27,6 +27,12 @@
                     <td><fmt:formatDate value='${reportDay}' pattern='yyyy-MM-dd' /></td>
                 </tr>
                 <tr>
+                    <th>タイトル</th>
+                    <td><pre>
+                            <c:out value="${report.title}" />
+                        </pre></td>
+                </tr>
+                <tr>
                     <th>内容</th>
                     <td><pre><c:out value="${report.content}" /></pre></td>
                 </tr>
@@ -40,6 +46,28 @@
                     <fmt:parseDate value="${report.updatedAt}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="updateDay" type="date" />
                     <td><fmt:formatDate value="${updateDay}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
                 </tr>
+                <tr>
+                    <th>所属長承認</th>
+                    <td>
+                        <c:if test="${report.approval == null}">
+                            <span class="char-blue">
+                            <c:out value="未承認"/>
+                            </span>
+                        </c:if>
+
+                        <span <c:if test="${report.approval == '再提出'}">class="char-red"</c:if>>
+                        <c:out value="${report.approval}"/>
+                        </span>
+
+                        <span <c:if test="${report.approval != 'OK' or null}">${report.approval}</c:if>>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>所属長コメント</th>
+                    <td><pre><c:out value="${report.comment}" /></pre></td>
+                </tr>
+
             </tbody>
         </table>
 

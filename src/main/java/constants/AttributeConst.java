@@ -50,7 +50,9 @@ public enum AttributeConst {
     REP_TITLE("title"),
     REP_CONTENT("content"),
     REP_APPROVAL("approval"),
-    REP_COMMENT("comment");
+    REP_COMMENT("comment"),
+    CHECK("check"),
+    SEARCH("search");
 
     private final String text;
     private final Integer i;

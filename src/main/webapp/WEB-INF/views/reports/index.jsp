@@ -24,12 +24,26 @@
         </c:if>
         <h2>
             <span class="allreports">日報　一覧</span>
+
             <span class="wrap">
              　　<form method="POST" action="<c:url value='/?action=${actSearch}&command=${commSearch}' />" autocomplete="on">
-                <input id="search" name="${AttributeConst.EMPLOYEE.getValue()}" value="${id}" type="text" placeholder="氏名、タイトルで検索"><input id="search-submit" value="Rechercher" type="submit">
+                        <label for="name" class="name">
+                        　<input id="name" type="checkbox" name="check" value="name">
+                            氏名
+                        </label>
+                        <label for="title" class="title">
+                         <input id="title" type="checkbox" name="check" value="title">
+                           タイトル
+                        </label>
+                        <label for="unapploved" class="unapploved">
+                         <input id="unapploved" type="checkbox" name="check" value="unapploved">
+                           未承認のみ
+                        </label>
+                <input id="search" name="${AttributeConst.SEARCH.getValue()}" value="${id}" type="text" placeholder="氏名、タイトルで検索"><input id="search-submit" value="Rechercher" type="submit">
                 </form>
             </span>
         </h2>
+
         <table id="report_list">
             <tbody>
                 <tr>

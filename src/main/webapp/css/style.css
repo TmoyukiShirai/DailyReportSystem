@@ -32,7 +32,7 @@ h2 {
 
 .wrap {/*全体*/
   /* margin: 50px 100px; */
- /*  display: inline-block; */
+  display: inline-block;
   position: relative;
   height: 40px;
   float: right;
@@ -43,7 +43,7 @@ h2 {
 input[id="search"] {/*入力部分スタイリング。width: 0px;にしておく*/
   height: 40px;
   font-size: 20px;
- /*  display: inline-block; */
+  display: inline-block;
   font-weight: 100;
   border: none;
   outline: none;
@@ -76,7 +76,7 @@ input[id="search"]:focus {
 input[id="search-submit"] {/*アイコン部分*/
   height: 40px;
   width: 40px;
-  /* display: inline-block; */
+  display: inline-block;
   color:red;
   float: right;
   background: url(../img/icon_search-5.svg) center center no-repeat;
@@ -96,6 +96,29 @@ input[id="search-submit"]:hover {
   opacity: 0.8;
 }
 
+ /* clearfix:after{
+    content: " ";
+    display: table;
+    clear: both;
+} */
+
+/* .checkbox{
+    clear: left;
+} */
+
+
+/* チェックボックスボタン部分 */
+input[id="name"],[id="title"]{
+    display:inline-block;
+
+}
+
+/* チェックボックス文字部分 */
+.name,.title {
+    display:inline-block;
+    color: red;
+    font-size:25px;
+}
 
 
 

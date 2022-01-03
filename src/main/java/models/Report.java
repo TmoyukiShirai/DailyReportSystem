@@ -45,17 +45,18 @@ import lombok.Setter;
     @NamedQuery(
             name = JpaConst.Q_REP_COUNT_BY_SEARCH,
             query = JpaConst.Q_REP_COUNT_BY_SEARCH_DEF),
-
-
-//    @NamedQuery(
-//            name = JpaConst.Q_REP_GET_TITLE_BY_SEARCH,
-//            query = JpaConst.Q_REP_GET_TITLE_BY_SEARCH_DEF),
-//    @NamedQuery(
-//            name = JpaConst.Q_REP_COUNT_TITLE_BY_SEARCH,
-//            query = JpaConst.Q_REP_COUNT_TITLE_BY_SEARCH_DEF),
-//    @NamedQuery(
-//            name = JpaConst.Q_REP_GET_ALL_UNAPPROVED,
-//            query = JpaConst.Q_REP_GET_ALL_UNAPPROVED_DEF)
+    @NamedQuery(
+            name = JpaConst.Q_REP_GET_TITLE_BY_SEARCH,
+            query = JpaConst.Q_REP_GET_TITLE_BY_SEARCH_DEF),
+    @NamedQuery(
+            name = JpaConst.Q_REP_COUNT_TITLE_BY_SEARCH,
+            query = JpaConst.Q_REP_COUNT_TITLE_BY_SEARCH_DEF),
+    @NamedQuery(
+            name = JpaConst.Q_REP_GET_ALL_UNAPPROVED,
+            query = JpaConst.Q_REP_GET_ALL_UNAPPROVED_DEF),
+    @NamedQuery(
+            name = JpaConst.Q_REP_COUNT_ALL_UNAPPROVED,
+            query = JpaConst.Q_REP_COUNT_ALL_UNAPPROVED_DEF)
 
 })
 

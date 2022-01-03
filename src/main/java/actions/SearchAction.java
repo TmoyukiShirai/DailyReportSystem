@@ -35,18 +35,37 @@ public class SearchAction extends ActionBase {
 
 
     public void search() throws ServletException, IOException {
-        //検索に該当する従業員情報を取得
-        String employee = getRequestParam(AttributeConst.EMPLOYEE);
+        //検索に該当する従業員情報を取得、検索したタイトルに該当する日報を取得
+        String check = getRequestParam(AttributeConst.CHECK);
+        String search = getRequestParam(AttributeConst.SEARCH);
 
         //検索に該当する従業員が作成した日報データを、指定されたページ数の一覧画面に表示する分取得する
         int page = getPage();
-        List<ReportView> reports = service.getReportBySearchPerPage(employee, page);
+        // if 名前で検索された場合
+        if (check.equals("name")) {
+            List<ReportView> reports = service.getReportBySearchPerPage(search, page);
+            //検索に該当する従業員が作成した日報データの件数を取得
+            long myReportsCount = service.countAllBySearch(search);
+            putRequestScope(AttributeConst.REPORTS, reports); //取得した日報データ
+            putRequestScope(AttributeConst.REP_COUNT, myReportsCount); //検索した従業員が作成した日報の数
+        }
+        if (check.equals("title")){  // if タイトルで検索された場合
+            //検索したタイトルに該当する日報データを、指定されたページ数の一覧画面に表示する分取得する
+            List<ReportView> reports = service.getTitleBySearchPerPage(search, page);
+            //検索したタイトルに該当する日報データの件数を取得
+            long myReportsCount = service.countTitleBySearch(search);
+            putRequestScope(AttributeConst.REPORTS, reports); //タイトルをキーに取得した日報データ
+            putRequestScope(AttributeConst.REP_COUNT, myReportsCount); //検索した日報の数
+        }
+        if (check.equals("unapploved")){ // if 未承認のみ絞り込みたい場合
+            List<ReportView> reports = service.getReportUnapplovedPerPage(search, page);
+            //未承認の日報データの件数を取得
+            long myReportsCount = service.countAllUnapploved(search);
+            putRequestScope(AttributeConst.REPORTS, reports); //取得した日報データ
+            putRequestScope(AttributeConst.REP_COUNT, myReportsCount); //未承認の日報の数
+        }
 
-        //検索に該当する従業員が作成した日報データの件数を取得
-        long myReportsCount = service.countAllBySearch(employee);
 
-        putRequestScope(AttributeConst.REPORTS, reports); //取得した日報データ
-        putRequestScope(AttributeConst.REP_COUNT, myReportsCount); //検索した従業員が作成した日報の数
         putRequestScope(AttributeConst.PAGE, page); //ページ数
         putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE); //1ページに表示するレコードの数
 
@@ -62,10 +81,7 @@ public class SearchAction extends ActionBase {
     }
 }
 
-//public void searchTitle() throws ServletException, IOException {
-//
-//}
-//
+
 //public void searchUnapproved() throws ServletException, IOException {
 //
 //}

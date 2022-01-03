@@ -54,15 +54,6 @@
                     <td><fmt:formatDate value="${updateDay}"
                             pattern="yyyy-MM-dd HH:mm:ss" /></td>
                 </tr>
-               <!--  <tr>
-                    <th>所属長承認</th>
-                    <td>
-                    <select id="approval" name="approval" class="form-control">
-                            <option value="OK">OK</option>
-                            <option value="再提出">再提出</option>
-                    </select></td>
-
-                </tr> -->
 
                 <form id="approval" id="comment" method="POST" action="?action=Report&command=adminJudge">
                  <tr>
@@ -76,14 +67,13 @@
                 </tr>
 
                 <tr>
-                <th>
-                 <label for="${AttributeConst.REP_COMMENT.getValue()}">所属長コメント</label></th>
-                 <td>
-                <textarea id="comment" name="${AttributeConst.REP_COMMENT.getValue()}" rows="5" cols="25">${report.comment}</textarea>
-                <input type="hidden" name="${AttributeConst.REP_ID.getValue()}" value="${report.id}" />　<!-- リクエストとしてメソッドに送る -->
-　　　　　　　　　　<input type="hidden" name="${AttributeConst.TOKEN.getValue()}" value="${_token}" />　<!-- リクエストとしてメソッドに送る -->
-                <div><button type="submit">承認</button></div>
-                </td>
+	                <th><label for="${AttributeConst.REP_COMMENT.getValue()}">所属長コメント</label></th>
+	                <td>
+		                <textarea id="comment" name="${AttributeConst.REP_COMMENT.getValue()}" rows="5" cols="25">${report.comment}</textarea>
+		                <input type="hidden" name="${AttributeConst.REP_ID.getValue()}" value="${report.id}" />　<!-- リクエストとしてメソッドに送る -->
+		                <input type="hidden" name="${AttributeConst.TOKEN.getValue()}" value="${_token}" />　<!-- リクエストとしてメソッドに送る -->
+		                <div><button type="submit">承認</button></div>
+	                </td>
                 </tr>
                 </form>
 
