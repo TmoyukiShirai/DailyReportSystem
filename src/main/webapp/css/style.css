@@ -37,7 +37,6 @@ h2 {
   height: 40px;
   float: right;
   padding: 0;
-  position: relative;
 }
 
 input[id="search"] {/*入力部分スタイリング。width: 0px;にしておく*/
@@ -52,7 +51,7 @@ input[id="search"] {/*入力部分スタイリング。width: 0px;にしてお�
   padding-right: 60px;
   width: 0px;
   position: absolute;
-  top: 0;
+  top: 30px;
   right: 0;
   background: none;
   z-index: 3;
@@ -83,12 +82,11 @@ input[id="search-submit"] {/*アイコン部分*/
   text-indent: -10000px;
   border: none;
   position: absolute;
-  top: 0;
+  top: 30px;
   right: 0;
   z-index: 2;
   cursor: pointer;
   opacity: 0.4;
-  cursor: pointer;
   transition: opacity .4s ease;
 }
 
@@ -96,30 +94,48 @@ input[id="search-submit"]:hover {
   opacity: 0.8;
 }
 
- /* clearfix:after{
-    content: " ";
-    display: table;
-    clear: both;
-} */
+.searchList{
+position: absolute;
+top : 0px;
+right: 0px;
+font-size:20px;
+width:300px;
+}
 
-/* .checkbox{
-    clear: left;
-} */
-
-
-/* チェックボックスボタン部分 */
-input[id="name"],[id="title"]{
-    display:inline-block;
+/* ボタンの装飾 */
+.btn-unapproved {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: 0;
+  border-radius: 0;
+  background: #ccc;
+}
+.btn-unapproved {
+  display: inline-block;
+  appearance: none;
+  border: 0;
+  border-radius: 5px;
+  background: #4676D7;
+  color: #fff;
+  margin-left:8px;
+  height: 23px;
+  padding: 2px 4px;
+  font-size: 13px;
+}
+.btn-unapproved {
+  background: #1d49aa;
 
 }
 
-/* チェックボックス文字部分 */
-.name,.title {
-    display:inline-block;
-    color: red;
-    font-size:25px;
+.btn-unapproved {
+  outline: none;
+  box-shadow: 0 0 0 2px #cbd6ee;
 }
-
+.btn-unapproved {
+    min-width: 70px;
+    /* other styles */
+}
 
 
 li {

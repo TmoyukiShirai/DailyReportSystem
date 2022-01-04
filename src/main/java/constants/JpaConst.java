@@ -96,10 +96,10 @@ public interface JpaConst {
 
     //未承認の日報を絞り込む
     String Q_REP_GET_ALL_UNAPPROVED = ENTITY_REP + ".getAllUnapproved";
-    String Q_REP_GET_ALL_UNAPPROVED_DEF = "SELECT r FROM Report AS r WHERE r.approval IS NULL ORDER BY r.id DESC";
+    String Q_REP_GET_ALL_UNAPPROVED_DEF = "SELECT r FROM Report AS r WHERE r.approval IS NULL OR r.approval = '再提出済' ORDER BY r.id DESC";
   //未承認の日報を絞り込む
     String Q_REP_COUNT_ALL_UNAPPROVED = ENTITY_REP + ".countAllUnapproved";
-    String Q_REP_COUNT_ALL_UNAPPROVED_DEF = "SELECT COUNT(r) FROM Report AS r WHERE r.approval IS NULL";
+    String Q_REP_COUNT_ALL_UNAPPROVED_DEF = "SELECT COUNT(r) FROM Report AS r WHERE r.approval IS NULL OR r.approval = '再提出済'";
 
     //+ JPQL_PARM_TITLE +の記述は、入力されたパラメータを受け取るためのもの
 

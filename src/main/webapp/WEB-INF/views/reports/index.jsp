@@ -8,6 +8,7 @@
 <c:set var="command" value="${ForwardConst.CMD_LOGIN.getValue()}" />
 
 <c:set var="actRep" value="${ForwardConst.ACT_REP.getValue()}" />
+<c:set var="actTop" value="${ForwardConst.ACT_TOP.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var="commShow" value="${ForwardConst.CMD_SHOW.getValue()}" />
 <c:set var="commShowAdmin" value="${ForwardConst.CMD_SHOW_ADMIN.getValue()}" />
@@ -27,23 +28,27 @@
 
             <span class="wrap">
              　　<form method="POST" action="<c:url value='/?action=${actSearch}&command=${commSearch}' />" autocomplete="on">
-                        <label for="name" class="name">
-                        　  <input id="name" type="checkbox" name="check" value="name">
-                            氏名
+                        <span class="searchList">
+                            <label for="name" class="name">
+                            　  <input id="name" type="radio" name="check" value="name">
+                                氏名
                             </label>
-                        <label for="title" class="title">
-                            <input id="title" type="checkbox" name="check" value="title">
-                           タイトル
+                            <label for="title" class="title">
+                                <input id="title" type="radio" name="check" value="title">
+                               タイトル
                             </label>
-                        <label for="unapproved" class="unapproved">
-                            <button id="unapproved" type="submit" name="check" value="unapproved">
-                           未承認のみ
-                            </button>
-                        </label>
-                <input id="search" name="${AttributeConst.SEARCH.getValue()}" value="${id}" type="text" placeholder="氏名、タイトルで検索"><input id="search-submit" value="Rechercher" type="submit">
+                            <label for="btn-unapproved" class="unapproved">
+                                <button id="btn-unapproved" class="btn-unapproved" type="submit" name="check" value="unapproved">
+                               未承認のみ
+                                </button>
+                            </label>
+                        </span>
+                <input id="search" name="${AttributeConst.SEARCH.getValue()}" value="${id}" type="text" placeholder="氏名かタイトルで検索"><input id="search-submit" value="Rechercher" type="submit">
                 </form>
             </span>
         </h2>
+
+        <br>
 
         <table id="report_list">
             <tbody>
@@ -71,12 +76,22 @@
                                </span>
                            </c:if>
 
-                        　　<span <c:if test="${report.approval == '再提出'}">class="char-red"</c:if>>
-                            <c:out value="${report.approval}"/>
-                           </span>
+                           <c:if test="${report.approval == '再提出'}">
+                               <span class="char-red">
+                               <c:out value="${report.approval}"/>
+                               </span>
+                           </c:if>
 
-                            <span <c:if test="${report.approval != 'OK' or null}">${report.approval}</c:if>>
-                            </span>
+                           <c:if test="${report.approval == '再提出済'}">
+                               <span class="char-blue">
+                               <c:out value="${report.approval}"/>
+                               </span>
+                           </c:if>
+
+                           <c:if test="${report.approval == 'OK'}">
+                               <c:out value="${report.approval}"/>
+                           </c:if>
+
                         </td>
                          <td class="report_comment"><c:out value="${report.comment}" /></td>
                          <td class="report_action">
@@ -106,7 +121,7 @@
             </c:forEach>
         </div>
         <p><a href="<c:url value='?action=${actRep}&command=${commNew}' />">新規日報の登録</a></p>
-        <p><a href="<c:url value='?action=${actRep}&command=${commIdx}' />">一覧に戻る</a></p>
+        <p><a href="<c:url value='?action=${actTop}&command=${commIdx}' />">一覧に戻る</a></p>
 
     </c:param>
 </c:import>

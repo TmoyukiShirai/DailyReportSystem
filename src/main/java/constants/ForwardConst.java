@@ -27,7 +27,9 @@ public enum ForwardConst {
     CMD_NEW("entryNew"),
     CMD_CREATE("create"),
     CMD_EDIT("edit"),
+    CMD_REEDIT("reEdit"),
     CMD_UPDATE("update"),
+    CMD_RESUBMIT("resubmit"),
     CMD_DESTROY("destroy"),
     CMD_SEARCH("search"),
 
@@ -43,7 +45,8 @@ public enum ForwardConst {
     FW_REP_SHOW("reports/show"),
     FW_REP_ADMIN("reports/admin.judge"),
     FW_REP_NEW("reports/new"),
-    FW_REP_EDIT("reports/edit");
+    FW_REP_EDIT("reports/edit"),
+    FW_REP_REEDIT("reports/reEdit");
 
     /**
      * 文字列

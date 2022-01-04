@@ -9,6 +9,7 @@
 <c:set var="actRep" value="${ForwardConst.ACT_REP.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var="commEdt" value="${ForwardConst.CMD_EDIT.getValue()}" />
+<c:set var="commreEdt" value="${ForwardConst.CMD_REEDIT.getValue()}" />
 
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
@@ -72,9 +73,18 @@
         </table>
 
         <c:if test="${sessionScope.login_employee.id == report.employee.id}">
-            <p>
-                <a href="<c:url value='?action=${actRep}&command=${commEdt}&id=${report.id}' />">この日報を編集する</a>
-            </p>
+            <c:choose>
+                <c:when test="${report.approval == '再提出'}">
+                    <p>
+                        <a href="<c:url value='?action=${actRep}&command=${commreEdt}&id=${report.id}' />">再提出する</a>
+                    </p>
+                </c:when>
+                <c:otherwise>
+                    <p>
+                        <a href="<c:url value='?action=${actRep}&command=${commEdt}&id=${report.id}' />">この日報を編集する</a>
+                    </p>
+                </c:otherwise>
+            </c:choose>
         </c:if>
 
         <p>

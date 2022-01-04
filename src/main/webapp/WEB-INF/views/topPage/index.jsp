@@ -43,18 +43,28 @@
                         <td class="report_title">${report.title}</td>
                         <td class="report_approval">
 
-                           <c:if test="${report.approval == null}">
+                        <c:if test="${report.approval == null}">
                                <span class="char-blue">
                                <c:out value="未承認"/>
                                </span>
                            </c:if>
 
-                        　　<span <c:if test="${report.approval == '再提出'}">class="char-red"</c:if>>
-                            <c:out value="${report.approval}"/>
-                           </span>
+                           <c:if test="${report.approval == '再提出'}">
+                               <span class="char-red">
+                               <c:out value="${report.approval}"/>
+                               </span>
+                           </c:if>
 
-                            <span <c:if test="${report.approval != 'OK' or null}">${report.approval}</c:if>>
-                            </span>
+                           <c:if test="${report.approval == '再提出済'}">
+                               <span class="char-blue">
+                               <c:out value="${report.approval}"/>
+                               </span>
+                           </c:if>
+
+                           <c:if test="${report.approval == 'OK'}">
+                               <c:out value="${report.approval}"/>
+                           </c:if>
+
                         </td>
                          <td class="report_comment"><c:out value="${report.comment}" /></td>
                          <td class="report_action"><a href="<c:url value='?action=${actRep}&command=${commShow}&id=${report.id}' />">詳細を見る</a></td>
