@@ -52,7 +52,7 @@ public interface JpaConst {
     String JPQL_PARM_PASSWORD = "password"; //パスワード
     String JPQL_PARM_EMPLOYEE = "employee"; //従業員
     String JPQL_PARM_TITLE = "title"; //日報タイトル
-    String JPQL_PARM_APPLOVAL = "apploval"; //承認
+    String JPQL_PARM_APPROVAL = "approval"; //承認
 
     //NamedQueryの nameとquery
     //全ての従業員をidの降順に取得する
@@ -94,17 +94,11 @@ public interface JpaConst {
     String Q_REP_COUNT_TITLE_BY_SEARCH = ENTITY_REP + ".countTitleBySearch";
     String Q_REP_COUNT_TITLE_BY_SEARCH_DEF = "SELECT COUNT(r) FROM Report AS r WHERE r.title LIKE : " + JPQL_PARM_TITLE;
 
-//    //検索したタイトルに該当する日報を全件idの降順で取得する
-//    String Q_REP_GET_TITLE_BY_SEARCH = ENTITY_REP + ".getTitleBySearch";
-//    String Q_REP_GET_TITLE_BY_SEARCH_DEF = "SELECT r FROM Report AS r WHERE r.title LIKE : " + JPQL_PARM_TITLE + " ORDER BY r.id DESC";
-//    //検索したタイトルに該当する日報の件数を取得する
-//    String Q_REP_COUNT_TITLE_BY_SEARCH = ENTITY_REP + ".countTitleBySearch";
-//    String Q_REP_COUNT_TITLE_BY_SEARCH_DEF = "SELECT COUNT(r) FROM Report AS r WHERE r.title LIKE : " + JPQL_PARM_TITLE;
     //未承認の日報を絞り込む
-    String Q_REP_GET_ALL_UNAPPROVED = ENTITY_REP + ".getAllAnapproved";
+    String Q_REP_GET_ALL_UNAPPROVED = ENTITY_REP + ".getAllUnapproved";
     String Q_REP_GET_ALL_UNAPPROVED_DEF = "SELECT r FROM Report AS r WHERE r.approval IS NULL ORDER BY r.id DESC";
   //未承認の日報を絞り込む
-    String Q_REP_COUNT_ALL_UNAPPROVED = ENTITY_REP + ".countAllAnapproved";
+    String Q_REP_COUNT_ALL_UNAPPROVED = ENTITY_REP + ".countAllUnapproved";
     String Q_REP_COUNT_ALL_UNAPPROVED_DEF = "SELECT COUNT(r) FROM Report AS r WHERE r.approval IS NULL";
 
     //+ JPQL_PARM_TITLE +の記述は、入力されたパラメータを受け取るためのもの

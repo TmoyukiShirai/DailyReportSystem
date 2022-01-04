@@ -18,16 +18,14 @@ public class ReportService extends ServiceBase {
 
     /**
      * 未承認の日報データを、指定されたページ数の一覧画面に表示する分取得しReportViewのリストで返却する
-     * @param apploval
+     * @param approval
      * @param page ページ数
      * @return 一覧画面に表示するデータのリスト
      */
 
-    public List<ReportView> getReportUnapplovedPerPage(String apploval, int page) {
+    public List<ReportView> getAllUnapprovedPerPage(int page) {//検索欄は空欄なので、引数にStringは受け取らない。
 
         List<Report> reports = em.createNamedQuery(JpaConst.Q_REP_GET_ALL_UNAPPROVED, Report.class)
-                .setParameter(JpaConst.JPQL_PARM_APPLOVAL, apploval)
-                //setParameter(〇〇, △△)　〇〇を△△に置き換える処理、
                 .setFirstResult(JpaConst.ROW_PER_PAGE * (page - 1))
                 .setMaxResults(JpaConst.ROW_PER_PAGE)
                 .getResultList();
@@ -36,13 +34,12 @@ public class ReportService extends ServiceBase {
 
     /**
      * 未承認の日報データの件数を取得し、返却する
-     * @param apploval
+     * @param approval
      * @return 日報データの件数
      */
-    public long countAllUnapploved(String apploval) {
+    public long countAllUnapproved() {//検索欄は空欄なので、引数にStringは受け取らない。
 
         long count = (long) em.createNamedQuery(JpaConst.Q_REP_COUNT_ALL_UNAPPROVED, Long.class)
-                .setParameter(JpaConst.JPQL_PARM_APPLOVAL, apploval)
                 .getSingleResult();
 
         return count;
@@ -77,7 +74,7 @@ public class ReportService extends ServiceBase {
     public long countTitleBySearch(String title) {
 
         long count = (long) em.createNamedQuery(JpaConst.Q_REP_COUNT_TITLE_BY_SEARCH, Long.class)
-                .setParameter(JpaConst.JPQL_PARM_TITLE, title)
+                .setParameter(JpaConst.JPQL_PARM_TITLE, "%" + title + "%")
                 .getSingleResult();
 
         return count;
@@ -256,41 +253,4 @@ public class ReportService extends ServiceBase {
         em.getTransaction().commit();
 
     }
-
-
-
-    /**
-     * 検索したタイトルに該当する日報データを、指定されたページ数の一覧画面に表示する分取得しReportViewのリストで返却する
-     * @param title タイトル
-     * @param page ページ数
-     * @return 一覧画面に表示するデータのリスト
-     */
-
-    public List<ReportView> getTitlePerPage(ReportView title, int page) {
-
-        List<Report> reports = em.createNamedQuery(JpaConst.Q_REP_GET_TITLE_BY_SEARCH, Report.class)
-                .setParameter(JpaConst.JPQL_PARM_TITLE, ReportConverter.toModel(title))
-                .setFirstResult(JpaConst.ROW_PER_PAGE * (page - 1))
-                .setMaxResults(JpaConst.ROW_PER_PAGE)
-                .getResultList();
-        return ReportConverter.toViewList(reports);
-    }
-
-    /**
-     * 検索したタイトルに該当する日報データの件数を取得し、返却する
-     * @param title
-     * @return 日報データの件数
-     */
-    public long countTitle(ReportView title) {
-
-        long count = (long) em.createNamedQuery(JpaConst.Q_REP_COUNT_TITLE_BY_SEARCH, Long.class)
-                .setParameter(JpaConst.JPQL_PARM_TITLE, ReportConverter.toModel(title))
-                .getSingleResult();
-
-        return count;
-    }
-
-
-
-
 }

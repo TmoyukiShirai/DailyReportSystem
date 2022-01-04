@@ -28,16 +28,17 @@
             <span class="wrap">
              　　<form method="POST" action="<c:url value='/?action=${actSearch}&command=${commSearch}' />" autocomplete="on">
                         <label for="name" class="name">
-                        　<input id="name" type="checkbox" name="check" value="name">
+                        　  <input id="name" type="checkbox" name="check" value="name">
                             氏名
-                        </label>
+                            </label>
                         <label for="title" class="title">
-                         <input id="title" type="checkbox" name="check" value="title">
+                            <input id="title" type="checkbox" name="check" value="title">
                            タイトル
-                        </label>
-                        <label for="unapploved" class="unapploved">
-                         <input id="unapploved" type="checkbox" name="check" value="unapploved">
+                            </label>
+                        <label for="unapproved" class="unapproved">
+                            <button id="unapproved" type="submit" name="check" value="unapproved">
                            未承認のみ
+                            </button>
                         </label>
                 <input id="search" name="${AttributeConst.SEARCH.getValue()}" value="${id}" type="text" placeholder="氏名、タイトルで検索"><input id="search-submit" value="Rechercher" type="submit">
                 </form>
@@ -105,6 +106,7 @@
             </c:forEach>
         </div>
         <p><a href="<c:url value='?action=${actRep}&command=${commNew}' />">新規日報の登録</a></p>
+        <p><a href="<c:url value='?action=${actRep}&command=${commIdx}' />">一覧に戻る</a></p>
 
     </c:param>
 </c:import>

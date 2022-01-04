@@ -57,10 +57,10 @@ public class SearchAction extends ActionBase {
             putRequestScope(AttributeConst.REPORTS, reports); //タイトルをキーに取得した日報データ
             putRequestScope(AttributeConst.REP_COUNT, myReportsCount); //検索した日報の数
         }
-        if (check.equals("unapploved")){ // if 未承認のみ絞り込みたい場合
-            List<ReportView> reports = service.getReportUnapplovedPerPage(search, page);
+        if (check.equals("unapproved")){ // if 未承認のみ絞り込みたい場合
+            List<ReportView> reports = service.getAllUnapprovedPerPage(page); //検索欄は空欄なので、引数にsearchは受け取らない。
             //未承認の日報データの件数を取得
-            long myReportsCount = service.countAllUnapploved(search);
+            long myReportsCount = service.countAllUnapproved();
             putRequestScope(AttributeConst.REPORTS, reports); //取得した日報データ
             putRequestScope(AttributeConst.REP_COUNT, myReportsCount); //未承認の日報の数
         }
