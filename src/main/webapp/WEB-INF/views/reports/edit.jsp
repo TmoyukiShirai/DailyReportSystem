@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="constants.ForwardConst" %>
 
+<c:set var="actTop" value="${ForwardConst.ACT_TOP.getValue()}" />
 <c:set var="actRep" value="${ForwardConst.ACT_REP.getValue()}" />
 <c:set var="commUpd" value="${ForwardConst.CMD_UPDATE.getValue()}" />
 
@@ -14,7 +15,7 @@
         </form>
 
         <p>
-            <a href="<c:url value='?action=Report&command=index' />">一覧に戻る</a>
+            <a href="<c:url value='?action=Top&command=index' />">一覧に戻る</a>
         </p>
     </c:param>
 </c:import>

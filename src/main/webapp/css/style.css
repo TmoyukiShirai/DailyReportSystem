@@ -29,6 +29,115 @@ h2 {
     margin-bottom: 15px;
 }
 
+
+.wrap {/*全体*/
+  /* margin: 50px 100px; */
+  display: inline-block;
+  position: relative;
+  height: 40px;
+  float: right;
+  padding: 0;
+}
+
+input[id="search"] {/*入力部分スタイリング。width: 0px;にしておく*/
+  height: 40px;
+  font-size: 20px;
+  display: inline-block;
+  font-weight: 100;
+  border: none;
+  outline: none;
+  color: #555;
+  padding: 3px;
+  padding-right: 60px;
+  width: 0px;
+  position: absolute;
+  top: 30px;
+  right: 0;
+  background: none;
+  z-index: 3;
+  transition: width .4s cubic-bezier(0.000, 0.795, 0.000, 1.000);
+  cursor: pointer;
+}
+::placeholder{
+    color: #d9d9d9;
+}
+
+input[id="search"]:focus:hover {
+  border-bottom: 1px solid #BBB;
+}
+
+input[id="search"]:focus {
+  width: 350px;
+  z-index: 1;
+  border-bottom: 1px solid #BBB;
+  cursor: text;
+}
+input[id="search-submit"] {/*アイコン部分*/
+  height: 40px;
+  width: 40px;
+  display: inline-block;
+  color:red;
+  float: right;
+  background: url(../img/icon_search-5.svg) center center no-repeat;
+  text-indent: -10000px;
+  border: none;
+  position: absolute;
+  top: 30px;
+  right: 0;
+  z-index: 2;
+  cursor: pointer;
+  opacity: 0.4;
+  transition: opacity .4s ease;
+}
+
+input[id="search-submit"]:hover {
+  opacity: 0.8;
+}
+
+.searchList{
+position: absolute;
+top : 0px;
+right: 0px;
+font-size:20px;
+width:300px;
+}
+
+/* ボタンの装飾 */
+.btn-unapproved {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: 0;
+  border-radius: 0;
+  background: #ccc;
+}
+.btn-unapproved {
+  display: inline-block;
+  appearance: none;
+  border: 0;
+  border-radius: 5px;
+  background: #4676D7;
+  color: #fff;
+  margin-left:8px;
+  height: 23px;
+  padding: 2px 4px;
+  font-size: 13px;
+}
+.btn-unapproved {
+  background: #1d49aa;
+
+}
+
+.btn-unapproved {
+  outline: none;
+  box-shadow: 0 0 0 2px #cbd6ee;
+}
+.btn-unapproved {
+    min-width: 70px;
+    /* other styles */
+}
+
+
 li {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -63,7 +172,7 @@ td {
     padding: 10px 2%;
 }
 
-botton {
+button {
     font-size: 14px;
     padding: 5px 10px;
 }
@@ -91,6 +200,7 @@ botton {
     color: #721c24;
     background-color: #f8d7da;
 }
+
 
 table#employee_list th {
     width: 30%;
@@ -150,10 +260,14 @@ table#report_list .report_date {
 }
 
 table#report_list .report_title {
-    width: 37%;
+    width: 30%;
 }
 
 table#report_list .report_action {
+    width: 20%;
+}
+
+table#report_list .report_approval {
     width: 13%;
 }
 
@@ -165,13 +279,14 @@ h3 {
     font-size: larger;
 }
 
+.char-blue{
+    color: blue;
 
+}
 
-
-
-
-
-
+.char-red{
+    color:red;
+}
 
 
 

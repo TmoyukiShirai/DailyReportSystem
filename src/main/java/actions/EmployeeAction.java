@@ -79,7 +79,7 @@ public class EmployeeAction extends ActionBase {
     public void entryNew() throws ServletException, IOException {
 
         //管理者かどうかのチェック //追記
-        if (checkAdmin()) { //追記
+       if (checkAdmin()) { //追記
             putRequestScope(AttributeConst.TOKEN, getTokenId()); //CSRF対策用トークン
             putRequestScope(AttributeConst.EMPLOYEE, new EmployeeView()); //空の従業員インスタンス
 
@@ -87,6 +87,7 @@ public class EmployeeAction extends ActionBase {
             forward(ForwardConst.FW_EMP_NEW);
         } //追記
     }
+
 
     /**
      * 新規登録を行う
@@ -269,7 +270,7 @@ public class EmployeeAction extends ActionBase {
      * @throws ServletException
      * @throws IOException
      */
-    private boolean checkAdmin() throws ServletException, IOException {
+   private boolean checkAdmin() throws ServletException, IOException {
 
         //セッションからログイン中の従業員情報を取得
         EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
@@ -278,7 +279,7 @@ public class EmployeeAction extends ActionBase {
         if (ev.getAdminFlag() != AttributeConst.ROLE_ADMIN.getIntegerValue()) {
 
             forward(ForwardConst.FW_ERR_UNKNOWN);
-            return false;
+            return true;
 
         } else {
 
